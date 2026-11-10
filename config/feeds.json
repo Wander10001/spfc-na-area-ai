@@ -1,4 +1,6 @@
 {
+  "maxAgeHours": 36,
+  "maxItems": 40,
   "feeds": [
     {
       "name": "Google News - São Paulo FC",
@@ -9,6 +11,30 @@
       "url": "https://news.google.com/rss/search?q=S%C3%A3o+Paulo+Futebol+Clube&hl=pt-BR&gl=BR&ceid=BR:pt-419"
     }
   ],
-  "keywords": ["são paulo", "sao paulo", "spfc", "tricolor paulista", "morumbi", "cotia", "são-paulino", "sao-paulino"],
-  "exclude": ["fórmula 1", "são paulo (cidade)", "previsão do tempo"]
+  "keywords": [
+    "são paulo", "sao paulo", "spfc", "tricolor paulista",
+    "morumbi", "cotia", "são-paulino", "sao-paulino"
+  ],
+  "exclude": [
+    "fórmula 1", "são paulo (cidade)", "previsão do tempo"
+  ],
+  "categories": {
+    "Futebol profissional": [
+      "brasileirão", "campeonato brasileiro", "libertadores", "sul-americana",
+      "copa do brasil", "jogo", "partida", "gol", "gols", "vitória",
+      "derrota", "empate", "técnico", "treinador", "elenco", "contratação",
+      "reforço", "desfalque", "lesão", "machucado", "escalação", "atacante",
+      "zagueiro", "goleiro", "meio-campista"
+    ],
+    "Bastidores e gestão": [
+      "diretoria", "presidente", "conselho", "dívida", "finanças",
+      "contrato", "renovação", "demissão", "eleição", "gestão"
+    ],
+    "Base e Cotia": [
+      "base", "cotia", "sub-17", "sub-20", "promessa", "jovem", "categoria de base"
+    ],
+    "Torcida e estádio": [
+      "torcida", "morumbi", "estádio", "ingresso", "sócio-torcedor"
+    ]
+  }
 }
