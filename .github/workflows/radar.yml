@@ -1,0 +1,29 @@
+name: Radar SPFC NA ÁREA
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "17 */3 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  radar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar repositório
+        uses: actions/checkout@v4
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Executar radar
+        run: npm run radar
+      - name: Guardar resultados
+        uses: actions/upload-artifact@v4
+        with:
+          name: radar-spfc-${{ github.run_number }}
+          path: output/
+          if-no-files-found: error
+          retention-days: 14
