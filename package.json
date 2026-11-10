@@ -1,0 +1,9 @@
+{
+  "name": "spfc-na-area-ai",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Radar editorial de pautas para o canal independente SPFC NA ÁREA",
+  "scripts": { "radar": "node src/radar.mjs" },
+  "engines": { "node": ">=20" }
+}
