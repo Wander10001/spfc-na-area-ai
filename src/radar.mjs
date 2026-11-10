@@ -100,8 +100,9 @@ for (const feed of config.feeds) {
 // Junta matérias com títulos muito parecidos, mesmo quando os links são diferentes.
 const grouped = [];
 for (const item of collected.sort((a, b) => b.score - a.score)) {
+  const normalizedTitle = normalize(item.title);
   const match = grouped.find(existing =>
-    existing.normalizedTitle === normalize(item.title) ||
+    (normalizedTitle && existing.normalizedTitle === normalizedTitle) ||
     similarity(existing.title, item.title) >= 0.78
   );
   if (match) {
@@ -115,7 +116,7 @@ for (const item of collected.sort((a, b) => b.score - a.score)) {
     }
     match.score = Math.max(match.score, item.score);
   } else {
-    grouped.push({ ...item, normalizedTitle: normalize(item.title), alsoSeenIn: [] });
+    grouped.push({ ...item, normalizedTitle, alsoSeenIn: [] });
   }
 }
 
