@@ -1,0 +1,14 @@
+{
+  "feeds": [
+    {
+      "name": "Google News - São Paulo FC",
+      "url": "https://news.google.com/rss/search?q=S%C3%A3o+Paulo+FC+OR+SPFC&hl=pt-BR&gl=BR&ceid=BR:pt-419"
+    },
+    {
+      "name": "Google News - Tricolor Paulista",
+      "url": "https://news.google.com/rss/search?q=S%C3%A3o+Paulo+Futebol+Clube&hl=pt-BR&gl=BR&ceid=BR:pt-419"
+    }
+  ],
+  "keywords": ["são paulo", "sao paulo", "spfc", "tricolor paulista", "morumbi", "cotia", "são-paulino", "sao-paulino"],
+  "exclude": ["fórmula 1", "são paulo (cidade)", "previsão do tempo"]
+}
