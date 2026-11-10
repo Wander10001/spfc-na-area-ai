@@ -6,17 +6,16 @@ const config = JSON.parse(await readFile(resolve(root, "config/feeds.json"), "ut
 
 function clean(value = "") {
   return value
-    .replace(/<!\\[CDATA\\[([\\s\\S]*?)\\]\\]>/g, "$1")
+    .replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, "$1")
     .replace(/<[^>]+>/g, " ")
     .replace(/&amp;/g, "&").replace(/&quot;/g, '"')
     .replace(/&#39;|&apos;/g, "'").replace(/&lt;/g, "<").replace(/&gt;/g, ">")
-    .replace(/&#(\\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
-    .replace(/\\s+/g, " ").trim();
+    .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))
+    .replace(/\s+/g, " ").trim();
 }
 
 function getTag(xml, name) {
-  const escaped = name.replace(/[.*+?^${}()|[\\]\\\\]/g, "\\\\$&");
-  const match = xml.match(new RegExp("<" + escaped + "(?:\\\\s[^>]*)?>([\\\\s\\\\S]*?)</" + escaped + ">", "i"));
+  const match = xml.match(new RegExp("<" + name + "(?:\\s[^>]*)?>([\\s\\S]*?)</" + name + ">", "i"));
   return match ? clean(match[1]) : "";
 }
 
@@ -29,7 +28,7 @@ for (const feed of config.feeds) {
     });
     if (!response.ok) throw new Error("HTTP " + response.status);
     const xml = await response.text();
-    const blocks = [...xml.matchAll(/<item\\b[^>]*>([\\s\\S]*?)<\\/item>/gi)].map(match => match[1]);
+    const blocks = [...xml.matchAll(/<item\b[^>]*>([\s\S]*?)<\/item>/gi)].map(match => match[1]);
 
     for (const block of blocks) {
       const title = getTag(block, "title");
@@ -58,7 +57,7 @@ const payload = {
   editorialStatus: "REVISÃO HUMANA OBRIGATÓRIA",
   items: unique
 };
-await writeFile(resolve(root, "output/radar.json"), JSON.stringify(payload, null, 2) + "\\n");
+await writeFile(resolve(root, "output/radar.json"), JSON.stringify(payload, null, 2) + "\n");
 
 const lines = [
   "# Radar SPFC NA ÁREA",
@@ -84,5 +83,5 @@ unique.forEach((item, index) => {
 });
 
 if (!unique.length) lines.push("Nenhuma pauta passou pelos filtros nesta execução.", "");
-await writeFile(resolve(root, "output/radar.md"), lines.join("\\n"));
+await writeFile(resolve(root, "output/radar.md"), lines.join("\n"));
 console.log("Radar concluído:", unique.length, "pautas únicas.");
